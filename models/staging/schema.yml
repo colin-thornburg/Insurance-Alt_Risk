@@ -2,10 +2,10 @@ version: 2
 
 models:
   - name: risk_solutions
+    access: public
     config:
       contract:
         enforced: true
-      public: true
     description: "Detailed information about alternative risk solutions"
     columns:
       - name: solution_id
@@ -41,10 +41,10 @@ models:
         data_type: number(38,2)
 
   - name: monthly_risk_exposure
+    access: public
     config:
       contract:
         enforced: true
-      public: true
     description: "Monthly summary of risk exposure by solution type"
     columns:
       - name: month
