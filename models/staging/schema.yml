@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: risk_solutions
+    description: "Detailed information about alternative risk solutions"
+    columns:
+      - name: solution_id
+        description: "Unique identifier for each risk solution"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Unique identifier for each customer"
+        tests:
+          - not_null
+        meta:
+          contains_pii: true
+      - name: solution_type
+        description: "Type of alternative risk solution"
+      - name: risk_amount
+        description: "Amount of risk covered by the solution"
+      - name: start_date
+        description: "Solution start date"
+      - name: end_date
+        description: "Solution end date"
+      - name: underwriter_id
+        description: "Identifier of the underwriter responsible for the solution"
+      - name: annual_fee
+        description: "Annual fee for the risk solution"
+
+  - name: monthly_risk_exposure
+    description: "Monthly summary of risk exposure by solution type"
+    columns:
+      - name: month
+        description: "Month of the summary"
+        tests:
+          - not_null
+      - name: solution_type
+        description: "Type of alternative risk solution"
+      - name: total_risk_exposure
+        description: "Total risk amount for the month and solution type"
+      - name: avg_risk_amount
+        description: "Average risk amount for the month and solution type"
+      - name: active_customers
+        description: "Number of unique customers with solutions in the month and solution type"
+      - name: total_annual_fees
+        description: "Total annual fees for the month and solution type"
+
+  - name: customer_risk_profile
+    description: "Summary of risk solutions for each customer"
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer"
+        tests:
+          - unique
+          - not_null
+        meta:
+          contains_pii: true
+      - name: total_solutions
+        description: "Total number of risk solutions for the customer"
+      - name: total_risk_exposure
+        description: "Total risk amount across all solutions for the customer"
+      - name: avg_annual_fee
+        description: "Average annual fee across all solutions for the customer"
+      - name: earliest_solution_date
+        description: "Start date of the customer's earliest risk solution"
+      - name: latest_solution_date
+        description: "End date of the customer's latest risk solution"
